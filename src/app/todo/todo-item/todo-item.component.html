@@ -1,8 +1,8 @@
-<li class="completed">
+<li [ngClass]="{'completed': todo.completado, 'editing': editando}">
     <div class="view">
-        <input class="toggle" type="checkbox" checked>
-        <label>Aprender React.js</label>
-        <button class="destroy"></button>
+        <input class="toggle" type="checkbox" [formControl]="checkField" [checked]="todo.completado">
+        <label (dblclick)="editar()">{{todo.texto}}</label>
+        <button class="destroy" (click)="borrarTodo()"></button>
     </div>
-    <input class="edit" value="Aprender React.js">
+    <input class="edit" [value]="todo.texto" [formControl]="txtInput" (blur)="terminarEdicion()" #txtInputFisico>
 </li>
