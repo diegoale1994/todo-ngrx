@@ -1,6 +1,5 @@
 import * as fromTodo from './todo.actions';
 import { Todo } from './model/todo.model';
-import { TodosListComponent } from './todos-list/todos-list.component';
 
 
 const todo1 = new Todo('sacar a mi perro');
@@ -16,7 +15,7 @@ export function todoReducer(state = estadoInicial, action: fromTodo.Acciones): T
         case fromTodo.AGREGAR_TODO:
             const todo = new Todo(action.texto);
             return [...state, todo];
-            break;
+
         case fromTodo.TOGGLE_TODO:
             return state.map(( todo: Todo) => {
                 if (todo.id === action.id) {
@@ -28,7 +27,6 @@ export function todoReducer(state = estadoInicial, action: fromTodo.Acciones): T
                     return todo;
                 }
             });
-            break;
             case fromTodo.EDITAR_TODO:
             return state.map(( todo: Todo) => {
                 if (todo.id === action.id) {
@@ -40,10 +38,8 @@ export function todoReducer(state = estadoInicial, action: fromTodo.Acciones): T
                     return todo;
                 }
             });
-            break;
             case fromTodo.BORRAR_TODO:
             return state.filter(todo => todo.id !== action.id);
-            break;
 
             case fromTodo.TOGGLE_ALL_TODO:
             return state.map(todo => {
@@ -52,7 +48,9 @@ export function todoReducer(state = estadoInicial, action: fromTodo.Acciones): T
                     completado: action.completado
                 };
             });
-            break;
+            case fromTodo.BORRAR_TODO_TODO:
+            return state.filter(todo => !todo.completado);
+
         default:
         return state;
         break;
